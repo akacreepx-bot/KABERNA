@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTAL CIUDAD CONFORT v1.0</title>
+    <style>
+
+        body {
+            background-color: #008080;
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #000;
+        }
+
+        .window {
+            background-color: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #000;
+            border-bottom: 2px solid #000;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+        }
+        .title-bar {
+            background: #000080;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 4px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-retro {
+            background-color: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #000;
+            border-bottom: 2px solid #000;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 8px;
+            cursor: pointer;
+        }
+
+        .btn-retro:active {
+            border-top: 2px solid #000;
+            border-left: 2px solid #000;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+        }
+
+        .marquesina {
+            background-color: #000;
+            color: #00ff00;
+            font-family: monospace;
+            padding: 4px;
+            margin: 10px;
+            border: 2px inset #fff;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .header-banner {
+            background-color: #000080;
+            color: #ffff00;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 10px;
+           
+            border: 2px inset #fff;
+        }
+
+        .header-banner h1 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .header-banner p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .article-box {
+            background-color: #fff;
+            border: 2px inset #777;
+            padding: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .article-box h2 {
+            color: #000080;
+            font-size: 16px;
+            margin-top: 0;
+            border-bottom: 1px solid #c0c0c0;
+            padding-bottom: 5px;
+        }
+
+        .counter-box {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .counter {
+            background-color: #000;
+            color: #ff0000;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 2px 8px;
+            border: 1px solid #777;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            background-color: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #000;
+            border-bottom: 2px solid #000;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: block;
+        }
+        
+
+        .popup-body {
+            padding: 15px;
+            text-align: center;
+            background-color: #fffaf0;
+            margin: 3px;
+            border: 2px inset #fff;
+        }
+
+        .popup-title {
+            color: #d90429;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 100px;
+            text-transform: uppercase;
+        }
+
+        .popup-subtext {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 15px;
+            background-color: #fff3bf;
+            padding: 6px;
+            border: 1px dashed #e67e22;
+        }
+        .chair-icon {
+            width: 100px;
+            height: 70px;
+            background-color: #555;
+            margin: 0 auto 15px auto;
+            border-radius: 8px;
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        .chair-icon::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            background-color: #00ffff;
+            border: 1px solid #000;
+            border-radius: 50%;
+        }
+
+        .btn-buy {
+            background-color: #2b9348;
+            color: white;
+            width: 100%;
+            padding: 8px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        #close-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            line-height: 18px;
+            text-align: center;
+            background-color: #d90429;
+            color: white;
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="window">
+        <div class="title-bar">
+            <span>KABERNA.COM</span>
+            <div>
+                <button class="btn-retro">_</button>
+                <button class="btn-retro">□</button>
+                <button class="btn-retro">X</button>
+            </div>
+        </div>
+
+        <div class="marquesina">
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+                *** ATENCIÓN: Permanezca en su hogar. Las caminatas son prácticas altamente riesgosas y se consideran tendencias regresivas.***
+            </marquee>
+        </div>
+        <div class="content">
+            <div class="header-banner">
+                <h1>LA K.A.B.E.R.N.A</h1>
+                <p>Garantizando el aislamiento voluntario y el bienestar absoluto</p>
+            </div>
+
+            <div class="article-box">
+                <h2>¿Por qué salir si todo está adentro?</h2>
+                <p>
+                    En el mundo moderno, la necesidad de desplazarse físicamente ha sido superada. Salir a caminar al aire libre expone al ciudadano a pensamientos innecesarios, frío e incluso crímenes violentos.
+                </p>
+                <p>
+                    Nuestros estudios demuestran que la felicidad verdadera se alcanza cuando el cuerpo permanece cómodo y cálido frente a la pantalla, sin preocupaciones, observando contenido especializado para su entretenimiento y comodidad.
+                </p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: #000080;">
+                    ¡Pantalla buena, realidad mala!
+                </p>
+
+
+                <img src="imagenes/nuevo libro!!!!.png" width="310px" height="310px">
+
+                <img src="imagenes/zapatos de alguien que camina.png" width="310px" height="310px">
+            </div>
+        </div>
+    </div>
+
+    <div id="popup">
+        <div class="title-bar" style="background: #d90429;">
+            <img width="310px" height="310px" id="imgpopup" src="imagenes/anuncio pop-up.png">
+            <button id="close-btn" class="btn-retro" onmouseover="evadeCloseBtn()" onclick="evadeCloseBtn()">X</button>
+        </div>
+
+        <div class="popup-body">
+            <button class="btn-retro btn-buy" onclick="cerrarpopup()">¡COMPRAR AHORA!</button>
+            
+            <button class="btn-retro" style="width: 100%; text-align: center; font-size: 10px;">
+                No gracias
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function evadeCloseBtn() {
+            const btn = document.getElementById('close-btn');
+            
+            const randomX = Math.floor(Math.random() * 240) - 120; 
+            const randomY = Math.floor(Math.random() * 200) - 100; 
+
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        
+
+        function popup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+            
+            
+            const btn = document.getElementById('close-btn');
+            btn.style.transform = 'translate(0px, 0px)';
+        }
+        function cerrarpopup(){
+            document.getElementById("popup").style.display = "none"
+        }
+        setInterval(popup,15000)
+
+    </script>
+</body>
+</html>
